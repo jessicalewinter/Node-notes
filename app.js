@@ -11,29 +11,31 @@ var command = argv._[0];
 console.log('Command: ',command);
 console.log('Yargs: ', argv);
 
-var noteExist = (note) => {
-  if(note){
-    console.log('Note created!!!');
-    console.log('----');
-    console.log('Title: ', note.title);
-    console.log('Body: ', note.body);
-  }else{
-    console.log( 'Note title taken :(');
-  }
-};
-
 
 if(command === 'add'){
   var note = notes.addNote(argv.title, argv.body);
-  noteExist(note);
+  if(note){
+    console.log('Note created!!!');
+    notes.logNote(note);
+  }else {
+    console.log('Note title taken :(');
+  }
+
 }else if(command === 'list'){
   notes.getAll();
 }else if(command === 'read'){
-  notes.getNote(argv.title);
+  var readNote = notes.getNote(argv.title);
+  if(readNote){
+    console.log('Reading note:');
+    notes.logNote(readNote);
+  }else {
+    console.log('Note not found :(');
+  }
+
+
 }else if(command === 'remove'){
   var noteRemoved = notes.removeNote(argv.title);
-
-  var messageRemove = noteRemoved ? 'Note remooved': 'Note not found';
+  var messageRemove = noteRemoved ? 'Note removed': 'Note not found';
   console.log(messageRemove);
 
 }else{
