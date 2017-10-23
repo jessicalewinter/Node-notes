@@ -1,5 +1,3 @@
-console.log('Starting note.js');
-
 const fs = require('fs');
 module.exports.age = 25;
 
@@ -40,7 +38,7 @@ var addNote = (title, body) => {
 
 //Get all
 var getAll = () => {
-    console.log('Getting all notes');
+    return fetchNotes();
 }
 
 //Get note
